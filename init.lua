@@ -157,6 +157,31 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- [[ Color scheme ]]
+-- vim.cmd.colorscheme ''
+vim.opt.termguicolors = true
+vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
+-- You can configure highlights by doing something like:
+vim.cmd.hi 'Comment gui=none'
+require('base16-colorscheme').setup({
+  base00 = '#231e18', base01 = '#302b25', base02 = '#48413a', base03 = '#9d8b70',
+  base04 = '#b4a490', base05 = '#cabcb1', base06 = '#d7c8bc', base07 = '#e4d4c8',
+  base08 = '#d35c5c', base09 = '#ca7f32', base0A = '#e0ac16', base0B = '#b7ba53',
+  base0C = '#6eb958', base0D = '#88a4d3', base0E = '#bb90e2', base0F = '#b49368'
+})
+
+-- [[ Dev Icons ]]
+require("nvim-web-devicons").setup({
+  default = false,
+  override = {
+    [".md"] = {
+      icon = "",
+      color = "#c678dd",
+      name = "Markdown",
+    },
+  },
+})
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -781,25 +806,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
