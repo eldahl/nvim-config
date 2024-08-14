@@ -163,24 +163,36 @@ vim.opt.termguicolors = true
 vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
 -- You can configure highlights by doing something like:
 vim.cmd.hi 'Comment gui=none'
-require('base16-colorscheme').setup({
-  base00 = '#231e18', base01 = '#302b25', base02 = '#48413a', base03 = '#9d8b70',
-  base04 = '#b4a490', base05 = '#cabcb1', base06 = '#d7c8bc', base07 = '#e4d4c8',
-  base08 = '#d35c5c', base09 = '#ca7f32', base0A = '#e0ac16', base0B = '#b7ba53',
-  base0C = '#6eb958', base0D = '#88a4d3', base0E = '#bb90e2', base0F = '#b49368'
-})
+require('base16-colorscheme').setup {
+  base00 = '#231e18',
+  base01 = '#302b25',
+  base02 = '#48413a',
+  base03 = '#9d8b70',
+  base04 = '#b4a490',
+  base05 = '#cabcb1',
+  base06 = '#d7c8bc',
+  base07 = '#e4d4c8',
+  base08 = '#d35c5c',
+  base09 = '#ca7f32',
+  base0A = '#e0ac16',
+  base0B = '#b7ba53',
+  base0C = '#6eb958',
+  base0D = '#88a4d3',
+  base0E = '#bb90e2',
+  base0F = '#b49368',
+}
 
 -- [[ Dev Icons ]]
-require("nvim-web-devicons").setup({
+require('nvim-web-devicons').setup {
   default = false,
   override = {
-    [".md"] = {
-      icon = "",
-      color = "#c678dd",
-      name = "Markdown",
+    ['.md'] = {
+      icon = '',
+      color = '#c678dd',
+      name = 'Markdown',
     },
   },
-})
+}
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -606,7 +618,22 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-
+        clangd = {
+          settings = {
+            clangd = {
+              -- Here you can pass arguments directly to clangd if needed
+              args = {
+                '--background-index', -- Enable background indexing
+                '--clang-tidy', -- Enable clang-tidy integration
+                '--log=info', -- Set log level (change to verbose for detailed logs)
+                '--completion-style=detailed', -- More detailed completion suggestions
+                '--cross-file-rename', -- Enable cross-file rename
+              },
+              fallbackFlags = { '-std=c++17' }, -- Example of fallback flags
+            },
+          },
+          root_dir = require('lspconfig').util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git'),
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -877,14 +904,14 @@ require('lazy').setup({
     end,
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
+    },
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
