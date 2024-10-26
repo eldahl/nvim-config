@@ -136,6 +136,10 @@ require('nvim-web-devicons').setup {
   },
 }
 
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -444,6 +448,8 @@ require('lazy').setup({
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+          map('<leader>kk', vim.lsp.buf.signature_help, 'Signature Help')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
@@ -783,8 +789,40 @@ require('lazy').setup({
       'MunifTanjim/nui.nvim',
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
+    config = function()
+      require('neo-tree').setup {
+        window = {
+          position = 'right',
+        },
+      }
+    end,
+    vim.keymap.set('n', '<c-n>', ':Neotree reveal_force_cwd toggle<cr>', { desc = 'Toggle NeoTree', silent = true }),
   },
+  {
+    'voldikss/vim-floaterm',
+    branch = 'master',
+  },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
 
+      -- Only one of these is needed.
+      'nvim-telescope/telescope.nvim',
+    },
+    config = true,
+    vim.keymap.set('n', '<leader>ng', ':Neogit<cr>', { desc = 'Toggle Neogit' }),
+  },
+  {
+    'smoka7/hop.nvim',
+    version = '*',
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran',
+    },
+    vim.keymap.set('n', '<leader>hw', ':HopWord<cr>', { desc = 'Hop word' }),
+    vim.keymap.set('n', '<leader>ha', ':HopAnywhere<cr>', { desc = 'Hop anywhere' }),
+  },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
