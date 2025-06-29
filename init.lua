@@ -794,6 +794,13 @@ require('lazy').setup({
         window = {
           position = 'right',
         },
+        filesystem = {
+          filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          },
+        },
       }
     end,
     vim.keymap.set('n', '<c-n>', ':Neotree reveal_force_cwd toggle<cr>', { desc = 'Toggle NeoTree', silent = true }),
